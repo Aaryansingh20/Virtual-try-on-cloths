@@ -102,43 +102,43 @@ export default function TryOnPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gray-900 transition-colors duration-200">
-      {/* Title */}
-      <h1 className="text-4xl font-bold my-6 text-center text-white">
-        AI Virtual Try-On
-      </h1>
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="container mx-auto px-4 py-8">
+        {/* Title */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
+            AI Virtual Try-On
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Upload your photo and an image of a clothing item to see how it looks on you!
+          </p>
+        </div>
 
-      {/* Main content card */}
-      <main className="flex flex-grow flex-col items-center px-4 w-full">
-        <div className="w-full max-w-4xl bg-gray-800 p-6 md:p-8 rounded-lg shadow-2xl border border-gray-700 transition-colors duration-200">
+        {/* Main content card */}
+        <div className="max-w-4xl mx-auto bg-card border border-border rounded-lg p-6 md:p-8">
 
-          <div className="text-center text-gray-300 mb-6">
-            <p className="mb-4">
-              Upload your photo and an image of a clothing item to see how it looks on you!
-            </p>
-            
-            {/* Improved user guidance */}
-            <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 mb-4">
-              <h3 className="text-lg font-semibold text-blue-300 mb-2">📸 Tips for Best Results:</h3>
-              <ul className="text-sm text-blue-200 space-y-1 text-left max-w-2xl mx-auto">
-                <li>• Use a clear, front-facing photo of yourself with good lighting</li>
+          {/* Tips Section */}
+          <div className="bg-muted/50 border border-border rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Tips for Best Results:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+              <ul className="space-y-2">
+                <li>• Use a clear, front-facing photo with good lighting</li>
                 <li>• Choose clothing images with the item clearly visible</li>
-                <li>• Avoid blurry or low-resolution images</li>
                 <li>• Make sure your face is fully visible in your photo</li>
+              </ul>
+              <ul className="space-y-2">
+                <li>• Avoid blurry or low-resolution images</li>
                 <li>• Works best with simple backgrounds in both images</li>
+                <li>• Processing typically takes 10-30 seconds</li>
               </ul>
             </div>
-            
-            <small className="text-sm text-gray-400">
-              AI generation quality may vary. Processing typically takes 10-30 seconds.
-            </small>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* User Image Upload */}
-              <div className="flex flex-col items-center space-y-3">
-                <label htmlFor="userImage" className="block text-base font-medium text-gray-200">
+              <div className="space-y-4">
+                <label htmlFor="userImage" className="block text-lg font-medium text-foreground">
                   1. Upload Your Photo
                 </label>
                 <input
@@ -148,32 +148,32 @@ export default function TryOnPage() {
                   accept="image/png, image/jpeg, image/webp, image/jpg"
                   onChange={(e) => handleFileChange(e, setUserImage, setUserImagePreview)}
                   ref={userFileInputRef}
-                  className="block w-full text-sm text-gray-300
+                  className="block w-full text-sm text-foreground
                     file:mr-4 file:py-2 file:px-4
-                    file:rounded-full file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-blue-600 file:text-white
-                    hover:file:bg-blue-700 transition-colors
-                    bg-gray-700 border border-gray-600 rounded-lg"
+                    file:rounded-md file:border-0
+                    file:text-sm file:font-medium
+                    file:bg-primary file:text-primary-foreground
+                    hover:file:bg-primary/90 transition-colors
+                    bg-input border border-border rounded-md p-3"
                   required
                 />
                 {userImagePreview && (
-                  <div className="mt-4 border-2 border-gray-600 rounded-lg overflow-hidden shadow-lg bg-gray-700">
+                  <div className="border border-border rounded-lg overflow-hidden bg-muted">
                     <img 
                       src={userImagePreview} 
                       alt="User preview" 
-                      className="w-full h-auto max-h-60 object-contain bg-gray-800" 
+                      className="w-full h-auto max-h-60 object-contain" 
                     />
-                    <div className="p-2 bg-gray-700">
-                      <p className="text-xs text-gray-300 text-center">Your Photo Preview</p>
+                    <div className="p-3 bg-card">
+                      <p className="text-sm text-muted-foreground text-center">Your Photo Preview</p>
                     </div>
                   </div>
                 )}
               </div>
 
               {/* Clothing Image Upload */}
-              <div className="flex flex-col items-center space-y-3">
-                <label htmlFor="clothingImage" className="block text-base font-medium text-gray-200">
+              <div className="space-y-4">
+                <label htmlFor="clothingImage" className="block text-lg font-medium text-foreground">
                   2. Upload Clothing Item
                 </label>
                 <input
@@ -183,36 +183,37 @@ export default function TryOnPage() {
                   accept="image/png, image/jpeg, image/webp, image/jpg"
                   onChange={(e) => handleFileChange(e, setClothingImage, setClothingImagePreview)}
                   ref={clothingFileInputRef}
-                  className="block w-full text-sm text-gray-300
+                  className="block w-full text-sm text-foreground
                     file:mr-4 file:py-2 file:px-4
-                    file:rounded-full file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-purple-600 file:text-white
-                    hover:file:bg-purple-700 transition-colors
-                    bg-gray-700 border border-gray-600 rounded-lg"
+                    file:rounded-md file:border-0
+                    file:text-sm file:font-medium
+                    file:bg-secondary file:text-secondary-foreground
+                    hover:file:bg-secondary/90 transition-colors
+                    bg-input border border-border rounded-md p-3"
                   required
                 />
                 {clothingImagePreview && (
-                  <div className="mt-4 border-2 border-gray-600 rounded-lg overflow-hidden shadow-lg bg-gray-700">
+                  <div className="border border-border rounded-lg overflow-hidden bg-muted">
                     <img 
                       src={clothingImagePreview} 
                       alt="Clothing preview" 
-                      className="w-full h-auto max-h-60 object-contain bg-gray-800" 
+                      className="w-full h-auto max-h-60 object-contain" 
                     />
-                    <div className="p-2 bg-gray-700">
-                      <p className="text-xs text-gray-300 text-center">Clothing Item Preview</p>
+                    <div className="p-3 bg-card">
+                      <p className="text-sm text-muted-foreground text-center">Clothing Item Preview</p>
                     </div>
                   </div>
                 )}
               </div>
             </div>
 
+            {/* Error Display */}
             {error && (
-              <div className="text-red-400 text-sm text-center mt-4 bg-red-900/20 border border-red-500/30 rounded-lg p-4">
-                <p className="font-semibold mb-1">❌ Error:</p>
-                <p>{error}</p>
+              <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4">
+                <p className="font-semibold text-destructive mb-1">Error:</p>
+                <p className="text-destructive/80">{error}</p>
                 {error.includes('safety') && (
-                  <p className="text-xs mt-2 text-red-300">
+                  <p className="text-sm mt-2 text-destructive/60">
                     Try using different images or ensure they meet content guidelines.
                   </p>
                 )}
@@ -220,18 +221,21 @@ export default function TryOnPage() {
             )}
 
             {/* Buttons */}
-            <div className="flex justify-center pt-4 space-x-4">
+            <div className="flex justify-center gap-4 pt-4">
               <button
                 type="submit"
                 disabled={isLoading || !userImage || !clothingImage}
-                className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out transform hover:scale-105"
+                className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-md 
+                  hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed 
+                  transition-colors duration-200"
               >
                 {isLoading ? 'Generating...' : 'Try It On!'}
               </button>
               <button
                 type="button"
                 onClick={handleReset}
-                className="px-8 py-3 bg-gray-600 text-gray-100 font-semibold rounded-lg shadow-lg hover:bg-gray-500 transition duration-150 ease-in-out transform hover:scale-105"
+                className="px-8 py-3 bg-secondary text-secondary-foreground font-semibold rounded-md 
+                  hover:bg-secondary/90 transition-colors duration-200"
               >
                 Reset
               </button>
@@ -240,37 +244,34 @@ export default function TryOnPage() {
 
           {/* Loading Indicator */}
           {isLoading && (
-            <div className="mt-8 text-center bg-gray-700/50 rounded-lg p-6 border border-gray-600">
-              <div className="inline-block animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-indigo-400"></div>
-              <p className="text-indigo-300 mt-4 text-sm font-medium">
-                🎨 Creating your virtual try-on...
+            <div className="mt-8 text-center bg-muted/50 rounded-lg p-6 border border-border">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent mb-4"></div>
+              <p className="text-foreground font-medium">
+                Creating your virtual try-on...
               </p>
-              <p className="text-gray-400 text-xs mt-2">
+              <p className="text-muted-foreground text-sm mt-2">
                 This may take 10-30 seconds depending on image complexity
               </p>
-              <div className="mt-3 w-full bg-gray-600 rounded-full h-2">
-                <div className="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full animate-pulse" style={{width: '70%'}}></div>
-              </div>
             </div>
           )}
 
           {/* Generated Image Display */}
           {resultImageUrl && !isLoading && (
-            <div className="mt-8 pt-6 border-t border-gray-600">
-              <h2 className="text-2xl font-semibold mb-6 text-center text-white bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                ✨ Virtual Try-On Result
+            <div className="mt-8 pt-6 border-t border-border">
+              <h2 className="text-2xl font-semibold mb-6 text-center text-foreground">
+                Virtual Try-On Result
               </h2>
               <div className="flex justify-center">
-                <div className="border-2 border-gray-600 rounded-xl overflow-hidden shadow-2xl bg-gray-700">
+                <div className="border border-border rounded-lg overflow-hidden bg-muted">
                   <img
                     src={resultImageUrl}
                     alt="Virtual try-on result"
-                    className="max-w-full h-auto bg-gray-800"
+                    className="max-w-full h-auto"
                     style={{ maxHeight: '600px' }}
                   />
-                  <div className="p-4 bg-gray-700">
-                    <p className="text-sm text-gray-300 text-center">AI-Generated Try-On Result</p>
-                    <p className="text-xs text-gray-400 text-center mt-1">
+                  <div className="p-4 bg-card">
+                    <p className="text-sm text-muted-foreground text-center">AI-Generated Try-On Result</p>
+                    <p className="text-xs text-muted-foreground text-center mt-1">
                       How do you like the fit? Try different clothing items!
                     </p>
                   </div>
@@ -279,7 +280,7 @@ export default function TryOnPage() {
             </div>
           )}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
